@@ -21,6 +21,11 @@ describe('{{id}}', function(){
     mm('hi {{name.first}} {{name.last}}.', user).should.equal('hi tobi ferret.');
   })
 
+  it.only('should escape newlines', function(){
+    var user = { name: 'tobi' };
+    mm('hi,\nhow are you {{name}}?', user).should.equal('hi,\nhow are you tobi?');
+  })
+
   it('should only match words', function(done){
     try {
       mm('hi {{name)}}.');
