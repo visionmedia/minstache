@@ -16,6 +16,11 @@ describe('{{id}}', function(){
     mm('hi {{name}}.', user).should.equal('hi &lt;script&gt;.');
   })
 
+  it('should support nested props', function(){
+    var user = { name: { first: 'tobi', last: 'ferret' }};
+    mm('hi {{name.first}} {{name.last}}.', user).should.equal('hi tobi ferret.');
+  })
+
   it('should only match words', function(done){
     try {
       mm('hi {{name)}}.');
