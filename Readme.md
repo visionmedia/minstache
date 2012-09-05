@@ -40,6 +40,14 @@ module.exports = function(obj) {
 };
 ```
 
+## Todo
+
+ I just basically needed interpolation for now, but I'll add this stuff later:
+
+  - sections
+  - inverted sections
+  - lambdas
+
 ## License 
 
 (The MIT License)
