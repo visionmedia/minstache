@@ -20,6 +20,12 @@
 Hello {{name}}! {{^authenticated}}<a href="/login">login</a>{{/authenticated}}
 ```
 
+  or the following is valid:
+
+```
+Hello {name}! {^authenticated}<a href="/login">login</a>{/authenticated}
+```
+
   convert it:
 
 ```
