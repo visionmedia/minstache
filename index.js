@@ -44,8 +44,25 @@ function compile(str) {
     if (i % 2 == 0) {
       js.push('"' + tok.replace(/"/g, '\\"') + '"');
     } else {
-      if (!tok.match(/^[\w.]+$/)) throw new Error('invalid property "' + tok + '"');
-      js.push(' + escape(obj.' + tok + ') + ');
+      switch (tok[0]) {
+        case '/':
+          tok = tok.slice(1);
+          js.push(' : "") + ');
+          break;
+        case '^':
+          tok = tok.slice(1);
+          assertProperty(tok);
+          js.push(' + (!obj.' + tok + ' ? ');
+          break;
+        case '#':
+          tok = tok.slice(1);
+          assertProperty(tok);
+          js.push(' + (obj.' + tok + ' ? ');
+          break;
+        default:
+          assertProperty(tok);
+          js.push(' + escape(obj.' + tok + ') + ');
+      }
     }
   }
 
@@ -53,6 +70,17 @@ function compile(str) {
   js = escape.toString().replace(/^/gm, '  ') + ';\n  return ' + js;
 
   return new Function('obj', js);
+}
+
+/**
+ * Assert that `prop` is a valid property.
+ *
+ * @param {String} prop
+ * @api private
+ */
+
+function assertProperty(prop) {
+  if (!prop.match(/^[\w.]+$/)) throw new Error('invalid property "' + prop + '"');
 }
 
 /**
@@ -64,7 +92,7 @@ function compile(str) {
  */
 
 function parse(str) {
-  return str.split(/\{\{|\}\}/);
+  return str.split(/\{\{?|\}?\}/);
 }
 
 /**

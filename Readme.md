@@ -51,15 +51,17 @@ module.exports = function(obj) {
 
   Compile the mustache `string` to a stand-alone `Function` accepting a context `obj`.
 
+## Divergence
+
+  Minstache also allows `{` as an alias of `{{` to reduce the noise.
+
+  Partials are not supported, this lib is meant to be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
+
+  The `{#foo}` syntax behaves as a conditional only, iteration implies you're doing too much. If you have a list of users, have a "user" view and a "user-list" view. Maybe we'll add this in the future but for now `{#foo}{/foo}` compiles to a ternary.
+
 ## Todo
 
- I just basically needed interpolation for now, but I'll add this stuff later:
-
-  - sections
-  - inverted sections
   - lambdas
-
- No partials, this lib is meant to be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
 
 ## License 
 

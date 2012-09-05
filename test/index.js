@@ -5,6 +5,13 @@
 
 var mm = require('..');
 
+describe('{id}', function(){
+  it('should work too', function(){
+    var user = { name: 'tobi' };
+    mm('hi {name}.', user).should.equal('hi tobi.');
+  })
+})
+
 describe('{{id}}', function(){
   it('should buffer', function(){
     var user = { name: 'tobi' };
@@ -37,5 +44,54 @@ describe('{{id}}', function(){
       err.message.should.equal('invalid property "name)"');
       done();
     }
+  })
+})
+
+describe('{{#id}}', function(){
+  it('should pass through when truthy', function(){
+    var user = { admin: true };
+    mm('{{#admin}}yup{{/admin}}', user).should.equal('yup');
+  })
+
+  it('should ignore when falsey', function(){
+    var user = { admin: false };
+    mm('admin: {{#admin}}yup{{/admin}}', user).should.equal('admin: ');
+  })
+
+  it('should ignore when undefined', function(){
+    var user = {};
+    mm('admin: {{#admin}}yup{{/admin}}', user).should.equal('admin: ');
+  })
+
+  it('should support nested tags', function(){
+    var user = { admin: true, name: 'tobi' };
+    mm('{{#admin}}{{name}} is an admin{{/admin}}', user).should.equal('tobi is an admin');
+  })
+
+  it('should support nested conditionals', function(){
+    var user = { admin: true, authenticated: true };
+    mm('{{#admin}}{{#authenticated}}yup{{/}}{{/}}', user).should.equal('yup');
+  })
+})
+
+describe('{{^id}}', function(){
+  it('should ignore when truthy', function(){
+    var user = { admin: true };
+    mm('{{^admin}}yup{{/admin}}', user).should.equal('');
+  })
+
+  it('should pass through when falsey', function(){
+    var user = { admin: false };
+    mm('admin: {{^admin}}nope{{/admin}}', user).should.equal('admin: nope');
+  })
+
+  it('should support nested tags', function(){
+    var user = { admin: false, name: 'tobi' };
+    mm('{{^admin}}{{name}} is not an admin{{/admin}}', user).should.equal('tobi is not an admin');
+  })
+
+  it('should support nested conditionals', function(){
+    var user = { admin: false, authenticated: false };
+    mm('{{^admin}}{{^authenticated}}nope{{/}}{{/}}', user).should.equal('nope');
   })
 })
