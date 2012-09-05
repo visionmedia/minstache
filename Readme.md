@@ -9,7 +9,7 @@
 
 ## minstache(1)
 
-  The `minstache(1)` executable (mini-mustache) can compile a file to a valid 
+  The `minstache(1)` executable can compile a file to a valid 
   stand-alone commonjs module for you, there's no need to have minstache
   as a dependency:
 
