@@ -7,9 +7,9 @@
 
     $ npm install minstache
 
-## mm(1)
+## minstache(1)
 
-  The `mm(1)` executable (mini-mustache) can compile a file to a valid 
+  The `minstache(1)` executable (mini-mustache) can compile a file to a valid 
   stand-alone commonjs module for you, there's no need to have minstache
   as a dependency:
 
@@ -22,7 +22,7 @@ Hello {{name}}!
   convert it:
 
 ```
-$ mm < hello.mustache > hello.js
+$ minstache < hello.mustache > hello.js
 ```
 
   hello.js:

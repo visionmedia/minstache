@@ -12,7 +12,7 @@
     "should": "*"
   },
   "bin": {
-    "mm": "bin/mm"
+    "minstache": "bin/minstache"
   },
   "main": "index"
 }
