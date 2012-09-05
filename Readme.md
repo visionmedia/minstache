@@ -6,6 +6,7 @@
 ## Installation
 
     $ npm install minstache
+    $ component install visionmedia/minstache
 
 ## minstache(1)
 
