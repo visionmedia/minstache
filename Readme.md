@@ -17,7 +17,7 @@
   hello.mustache:
 
 ```
-Hello {{name}}!
+Hello {{name}}! {{^authenticated}}<a href="/login">login</a>{{/authenticated}}
 ```
 
   convert it:
@@ -29,7 +29,7 @@ $ minstache < hello.mustache > hello.js
   hello.js:
 
 ```js
-module.exports = function(obj) {
+module.exports = function anonymous(obj) {
   function escape(html) {
     return String(html)
       .replace(/&/g, '&amp;')
@@ -37,8 +37,8 @@ module.exports = function(obj) {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
   };
-  return "Hello " + escape(obj.name) + "!"
-};
+  return "Hello " + escape(obj.name) + "! " + (!obj.authenticated ? "<a href=\"/login\">login</a>" : "") + ""
+}
 ```
 
 ## API
