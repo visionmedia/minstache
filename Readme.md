@@ -43,13 +43,13 @@ module.exports = function(obj) {
 
 ## API
 
-### minstache(str, [obj])
+### minstache(string, [obj])
 
-  Compile and render the given mustache `str` with optional context `obj`.
+  Compile and render the given mustache `string` with optional context `obj`.
 
-### minstache.compile(str)
+### minstache.compile(string)
 
-  Compile the mustache `str` to a stand-alone `Function` accepting a context `obj`.
+  Compile the mustache `string` to a stand-alone `Function` accepting a context `obj`.
 
 ## Todo
 
@@ -60,7 +60,7 @@ module.exports = function(obj) {
   - lambdas
 
  I couldn't care less about partials, and will not add them, this lib is meant to
- be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials", pass other rendered strings to it.
+ be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it.
 
 ## License 
 
