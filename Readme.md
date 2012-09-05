@@ -40,6 +40,16 @@ module.exports = function(obj) {
 };
 ```
 
+## API
+
+### minstache(str, [obj])
+
+  Compile and render the given mustache `str` with optional context `obj`.
+
+### minstache.compile(str)
+
+  Compile the mustache `str` to a stand-alone `Function` accepting a context `obj`.
+
 ## Todo
 
  I just basically needed interpolation for now, but I'll add this stuff later:
