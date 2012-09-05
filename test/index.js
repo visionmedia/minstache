@@ -72,6 +72,17 @@ describe('{{#id}}', function(){
     var user = { admin: true, authenticated: true };
     mm('{{#admin}}{{#authenticated}}yup{{/}}{{/}}', user).should.equal('yup');
   })
+
+  it('should support lambdas', function(){
+    var obj = {
+      md: function(str){
+        return str.replace(/_(.*?)_/g, '<em>$1</em>');
+      }
+    };
+
+    mm('{#md}some _markdown_ awesome!{/md}', obj)
+      .should.equal('some <em>markdown</em> awesome!');
+  })
 })
 
 describe('{{^id}}', function(){

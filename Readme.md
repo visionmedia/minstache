@@ -63,12 +63,6 @@ module.exports = function anonymous(obj) {
 
   Partials are not supported, this lib is meant to be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
 
-  The `{#foo}` / `{^foo}` syntax behave as conditionals only, iteration implies you're doing too much. If you have a list of users, have a "user" view and a "user-list" view. Maybe we'll add this in the future but for now `{#foo}{/foo}` compiles to a ternary.
-
-## Todo
-
-  - lambdas
-
 ## License 
 
 (The MIT License)

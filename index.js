@@ -47,17 +47,17 @@ function compile(str) {
       switch (tok[0]) {
         case '/':
           tok = tok.slice(1);
-          js.push(' : "") + ');
+          js.push(') + ');
           break;
         case '^':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + (!obj.' + tok + ' ? ');
+          js.push(' + section(obj, "' + tok + '", true, ');
           break;
         case '#':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + (obj.' + tok + ' ? ');
+          js.push(' + section(obj, "' + tok + '", false, ');
           break;
         default:
           assertProperty(tok);
@@ -67,7 +67,11 @@ function compile(str) {
   }
 
   js = js.join('').replace(/\n/g, '\\n');
-  js = escape.toString().replace(/^/gm, '  ') + ';\n  return ' + js;
+
+  js = '\n'
+    + indent(escape.toString()) + ';\n\n'
+    + indent(section.toString()) + ';\n\n'
+    + '  return ' + js;
 
   return new Function('obj', js);
 }
@@ -93,6 +97,36 @@ function assertProperty(prop) {
 
 function parse(str) {
   return str.split(/\{\{?|\}?\}/);
+}
+
+/**
+ * Indent `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function indent(str) {
+  return str.replace(/^/gm, '  ');
+}
+
+/**
+ * Section handler.
+ *
+ * @param {Object} context obj
+ * @param {String} prop
+ * @param {String} str
+ * @param {Boolean} negate
+ * @api private
+ */
+
+function section(obj, prop, negate, str) {
+  var val = obj[prop];
+  if ('function' == typeof val) return val.call(obj, str);
+  if (negate) val = !val;
+  if (val) return str;
+  return '';
 }
 
 /**
