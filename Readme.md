@@ -59,8 +59,7 @@ module.exports = function(obj) {
   - inverted sections
   - lambdas
 
- I couldn't care less about partials, and will not add them, this lib is meant to
- be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
+ No partials, this lib is meant to be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
 
 ## License 
 
