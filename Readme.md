@@ -36,6 +36,7 @@ $ minstache < hello.mustache > hello.js
 
 ```js
 module.exports = function anonymous(obj) {
+
   function escape(html) {
     return String(html)
       .replace(/&/g, '&amp;')
@@ -43,7 +44,16 @@ module.exports = function anonymous(obj) {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
   };
-  return "Hello " + escape(obj.name) + "! " + (!obj.authenticated ? "<a href=\"/login\">login</a>" : "") + ""
+
+  function section(obj, prop, negate, str) {
+    var val = obj[prop];
+    if ('function' == typeof val) return val.call(obj, str);
+    if (negate) val = !val;
+    if (val) return str;
+    return '';
+  };
+
+  return "Hello " + escape(obj.name) + "! " + section(obj, "authenticated", true, "<a href=\"/login\">login</a>") + "\n"
 }
 ```
 
