@@ -58,6 +58,9 @@ module.exports = function(obj) {
   - inverted sections
   - lambdas
 
+ I couldn't care less about partials, and will not add them, this lib is meant to
+ be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials", pass other rendered strings to it.
+
 ## License 
 
 (The MIT License)
