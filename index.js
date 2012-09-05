@@ -66,12 +66,10 @@ function compile(str) {
     }
   }
 
-  js = js.join('').replace(/\n/g, '\\n');
-
   js = '\n'
     + indent(escape.toString()) + ';\n\n'
     + indent(section.toString()) + ';\n\n'
-    + '  return ' + js;
+    + '  return ' + js.join('').replace(/\n/g, '\\n');
 
   return new Function('obj', js);
 }
