@@ -71,6 +71,8 @@ function compile(str) {
     + indent(section.toString()) + ';\n\n'
     + '  return ' + js.join('').replace(/\n/g, '\\n');
 
+  js = normalize(js);
+
   return new Function('obj', js);
 }
 
@@ -94,7 +96,24 @@ function assertProperty(prop) {
  */
 
 function parse(str) {
-  return str.split(/\{\{?|\}?\}/);
+  return str
+    .replace(/\\\{/g, '__LBRACE__')
+    .replace(/\\\}/g, '__RBRACE__')
+    .split(/\{\{?|\}?\}/)
+}
+
+/**
+ * Normalize `str`, adding back braces.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function normalize(str) {
+  return str
+    .replace(/__LBRACE__/g, '{')
+    .replace(/__RBRACE__/g, '}');
 }
 
 /**

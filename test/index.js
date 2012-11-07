@@ -10,6 +10,10 @@ describe('{id}', function(){
     var user = { name: 'tobi' };
     mm('hi {name}.', user).should.equal('hi tobi.');
   })
+
+  it('should be escapable', function(){
+    mm('hi \\{name\\}.').should.equal('hi {name}.');
+  })
 })
 
 describe('{{id}}', function(){
