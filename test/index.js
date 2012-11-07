@@ -6,9 +6,9 @@
 var mm = require('..');
 
 describe('{id}', function(){
-  it('should work too', function(){
+  it('should not work', function(){
     var user = { name: 'tobi' };
-    mm('hi {name}.', user).should.equal('hi tobi.');
+    mm('hi {name}.', user).should.equal('hi {name}.');
   })
 })
 
@@ -80,7 +80,7 @@ describe('{{#id}}', function(){
       }
     };
 
-    mm('{#md}some _markdown_ awesome!{/md}', obj)
+    mm('{{#md}}some _markdown_ awesome!{{/md}}', obj)
       .should.equal('some <em>markdown</em> awesome!');
   })
 })
