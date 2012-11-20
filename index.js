@@ -59,6 +59,11 @@ function compile(str) {
           assertProperty(tok);
           js.push(' + section(obj, "' + tok + '", false, ');
           break;
+        case '&':
+          tok = tok.slice(1);
+          assertProperty(tok);
+          js.push(' + obj.' + tok + ' + ');
+          break;
         default:
           assertProperty(tok);
           js.push(' + escape(obj.' + tok + ') + ');

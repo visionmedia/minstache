@@ -106,3 +106,10 @@ describe('{{^id}}', function(){
     mm('{{^admin}}{{^authenticated}}nope{{/}}{{/}}', user).should.equal('nope');
   })
 })
+
+describe('{{&id}}', function(){
+  it('should not escape', function(){
+    var user = { name: '<script>' };
+    mm('hi {{&name}}.', user).should.equal('hi <script>.');
+  })
+})
