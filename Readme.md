@@ -1,4 +1,3 @@
-
 # minstache
 
   Mini mustache template engine.
@@ -62,8 +61,6 @@ module.exports = function anonymous(obj) {
   Compile the mustache `string` to a stand-alone `Function` accepting a context `obj`.
 
 ## Divergence
-
-  Minstache also allows `{` as an alias of `{{` to reduce the noise.
 
   Partials are not supported, this lib is meant to be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
 
