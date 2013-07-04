@@ -10,7 +10,7 @@
 
 ## minstache(1)
 
-  The `minstache(1)` executable can compile a file to a valid 
+  The `minstache(1)` executable can compile a file to a valid
   stand-alone commonjs module for you, there's no need to have minstache
   as a dependency:
 
@@ -63,10 +63,10 @@ module.exports = function anonymous(obj) {
 
 ## Divergence
 
-  Minstache also allows `{` as an alias of `{{` to reduce the noise.
-
   Partials are not supported, this lib is meant to be a small template engine solution for stand-alone [component](http://github.com/component) templates. If your template takes "partials" then pass other rendered strings to it. If you need a full-blown mustache solution Hogan.js is still great.
 
-## License 
+  Minstache uses `{{!name}}` for unescaped properties.
+
+## License
 
   MIT

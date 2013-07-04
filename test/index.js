@@ -47,6 +47,13 @@ describe('{{id}}', function(){
   })
 })
 
+describe('{{!id}}', function(){
+  it('should be unescaped', function(){
+    var user = { name: '<script>' };
+    mm('hi {{!name}}.', user).should.equal('hi <script>.');
+  })
+})
+
 describe('{{#id}}', function(){
   it('should pass through when truthy', function(){
     var user = { admin: true };
