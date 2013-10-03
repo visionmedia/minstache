@@ -70,6 +70,11 @@ describe('{{#id}}', function(){
     mm('admin: {{#admin}}yup{{/admin}}', user).should.equal('admin: ');
   })
 
+  it('should support nested props', function(){
+    var obj = { user: { admin: true }};
+    mm('{{#user.admin}}yup{{/user.admin}}', obj).should.equal('yup');
+  })
+
   it('should support nested tags', function(){
     var user = { admin: true, name: 'tobi' };
     mm('{{#admin}}{{name}} is an admin{{/admin}}', user).should.equal('tobi is an admin');
@@ -101,6 +106,11 @@ describe('{{^id}}', function(){
   it('should pass through when falsey', function(){
     var user = { admin: false };
     mm('admin: {{^admin}}nope{{/admin}}', user).should.equal('admin: nope');
+  })
+
+  it('should support nested props', function(){
+    var obj = { user: { admin: false }};
+    mm('{{^user.admin}}nope{{/user.admin}}', obj).should.equal('nope');
   })
 
   it('should support nested tags', function(){
