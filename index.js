@@ -52,12 +52,12 @@ function compile(str) {
         case '^':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", true, ');
+          js.push(' + section(obj, obj.' + tok + ', true, ');
           break;
         case '#':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", false, ');
+          js.push(' + section(obj, obj.' + tok + ', false, ');
           break;
         case '!':
           tok = tok.slice(1);
@@ -117,15 +117,14 @@ function indent(str) {
 /**
  * Section handler.
  *
- * @param {Object} context obj
- * @param {String} prop
- * @param {String} str
+ * @param {Object} obj
+ * @param {Mixed} val
  * @param {Boolean} negate
+ * @param {String} str
  * @api private
  */
 
-function section(obj, prop, negate, str) {
-  var val = obj[prop];
+function section(obj, val, negate, str) {
   if ('function' == typeof val) return val.call(obj, str);
   if (negate) val = !val;
   if (val) return str;
