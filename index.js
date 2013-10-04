@@ -62,7 +62,7 @@ function compile(str) {
         case '!':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + obj.' + tok + ' + ');
+          js.push(' + (obj.' + tok + ' || "") + ');
           break;
         default:
           assertProperty(tok);
@@ -141,7 +141,7 @@ function section(obj, prop, negate, str) {
  */
 
 function escape(html) {
-  return String(html)
+  return String(html || '')
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/</g, '&lt;')

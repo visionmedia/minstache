@@ -23,6 +23,11 @@ describe('{{id}}', function(){
     mm('hi {{name}}.', user).should.equal('hi &lt;script&gt;.');
   })
 
+  it('should ignore when undefined', function(){
+    var user = {};
+    mm('hi {{name}}.', user).should.equal('hi .');
+  })
+
   it('should support nested props', function(){
     var user = { name: { first: 'tobi', last: 'ferret' }};
     mm('hi {{name.first}} {{name.last}}.', user).should.equal('hi tobi ferret.');
@@ -51,6 +56,11 @@ describe('{{!id}}', function(){
   it('should be unescaped', function(){
     var user = { name: '<script>' };
     mm('hi {{!name}}.', user).should.equal('hi <script>.');
+  })
+
+  it('should ignore when undefined', function(){
+    var user = {};
+    mm('hi {{!name}}.', user).should.equal('hi .');
   })
 })
 
