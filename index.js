@@ -168,8 +168,8 @@ function indent(str) {
  *
  * @param {Object} context obj
  * @param {String} prop
- * @param {String} str
  * @param {Boolean} negate
+ * @param {Array} tokens
  * @api private
  */
 
