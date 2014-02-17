@@ -80,6 +80,12 @@ describe('{{#id}}', function(){
     mm('{{#admin}}{{#authenticated}}yup{{/}}{{/}}', user).should.equal('yup');
   })
 
+  it('should loop through arrays', function(){
+    var contacts = {'contacts' : [{'name': 'matt'}, {'name': 'john'}]};
+    mm('<ul>{{#contacts}}<li>{{name}}</li>{{/contacts}}</ul>', contacts)
+      .should.equal('<ul><li>matt</li><li>john</li></ul>');
+  })
+
   it('should support lambdas', function(){
     var obj = {
       md: function(str){
