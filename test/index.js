@@ -90,6 +90,12 @@ describe('{{#id}}', function(){
     mm('{{#md}}some _markdown_ awesome!{{/md}}', obj)
       .should.equal('some <em>markdown</em> awesome!');
   })
+
+  it('should iterate arrays', function(){
+    var contacts = { contacts: [{ name: 'matt' }, { name: 'john' }] };
+    mm('<ul>{{#contacts}}<li>{{name}}</li>{{/contacts}}</ul>', contacts)
+     .should.equal('<ul><li>matt</li><li>john</li></ul>');
+  })
 })
 
 describe('{{^id}}', function(){

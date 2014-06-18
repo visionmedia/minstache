@@ -47,17 +47,17 @@ function compile(str) {
       switch (tok[0]) {
         case '/':
           tok = tok.slice(1);
-          js.push(') + ');
+          js.push(' }) + ');
           break;
         case '^':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", true, ');
+          js.push(' + section(obj, "' + tok + '", true, function(obj){ return ');
           break;
         case '#':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", false, ');
+          js.push(' + section(obj, "' + tok + '", false, function(obj){ return ');
           break;
         case '!':
           tok = tok.slice(1);
@@ -119,16 +119,17 @@ function indent(str) {
  *
  * @param {Object} context obj
  * @param {String} prop
- * @param {String} str
+ * @param {Function} thunk
  * @param {Boolean} negate
  * @api private
  */
 
-function section(obj, prop, negate, str) {
+function section(obj, prop, negate, thunk) {
   var val = obj[prop];
-  if ('function' == typeof val) return val.call(obj, str);
+  if (Array.isArray(val)) return val.map(thunk).join('');
+  if ('function' == typeof val) return val.call(obj, thunk(obj));
   if (negate) val = !val;
-  if (val) return str;
+  if (val) return thunk(obj);
   return '';
 }
 
