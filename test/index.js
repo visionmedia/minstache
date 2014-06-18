@@ -92,9 +92,9 @@ describe('{{#id}}', function(){
   })
 
   it('should iterate arrays', function(){
-    var contacts = { contacts: [{ name: 'matt' }, { name: 'john' }] };
+    var contacts = { contacts: [{ name: 'tobi' }, { name: 'loki' }, { name: 'jane' }] };
     mm('<ul>{{#contacts}}<li>{{name}}</li>{{/contacts}}</ul>', contacts)
-     .should.equal('<ul><li>matt</li><li>john</li></ul>');
+     .should.equal('<ul><li>tobi</li><li>loki</li><li>jane</li></ul>');
   })
 })
 
