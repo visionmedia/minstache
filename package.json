@@ -2,7 +2,11 @@
   "name": "minstache",
   "version": "1.2.0",
   "description": "Mini mustache template engine",
-  "keywords": ["mustache", "template", "engine"],
+  "keywords": [
+    "mustache",
+    "template",
+    "engine"
+  ],
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "dependencies": {
     "commander": "1.0.4"
@@ -14,5 +18,9 @@
   "bin": {
     "minstache": "bin/minstache"
   },
-  "main": "index"
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/visionmedia/minstache.git"
+  }
 }
