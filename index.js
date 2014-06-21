@@ -1,4 +1,3 @@
-
 /**
  * Expose `render()`.`
  */
@@ -21,9 +20,8 @@ exports.compile = compile;
  */
 
 function render(str, obj) {
-  obj = obj || {};
   var fn = compile(str);
-  return fn(obj);
+  return obj ? fn(obj) : fn;
 }
 
 /**
