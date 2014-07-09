@@ -14,5 +14,9 @@
   "bin": {
     "minstache": "bin/minstache"
   },
-  "main": "index"
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/visionmedia/minstache.git"
+  }
 }
