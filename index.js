@@ -74,7 +74,7 @@ function compile(str) {
   }
 
   js = '\n'
-    + indent(escape.['toString']()) + ';\n\n'
+    + indent(escape['toString']()) + ';\n\n'
     + indent((window.__minstache_section)['toString']()) + ';\n\n'
     + '  return ' + js.join('').replace(/\n/g, '\\n');
 
