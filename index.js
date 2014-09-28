@@ -11,6 +11,8 @@ exports = module.exports = render;
 
 exports.compile = compile;
 
+window = window || {};
+
 /**
  * Render the given mustache `str` with `obj`.
  *
@@ -52,12 +54,12 @@ function compile(str) {
         case '^':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", true, function(obj){ return ');
+          js.push(' + window.__minstache_section(obj, "' + tok + '", true, function(obj){ return ');
           break;
         case '#':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", false, function(obj){ return ');
+          js.push(' + window.__minstache_section(obj, "' + tok + '", false, function(obj){ return ');
           break;
         case '!':
           tok = tok.slice(1);
@@ -72,8 +74,8 @@ function compile(str) {
   }
 
   js = '\n'
-    + indent(escape.toString()) + ';\n\n'
-    + indent(section.toString()) + ';\n\n'
+    + indent(escape['toString']()) + ';\n\n'
+    + indent((window.__minstache_section)['toString']()) + ';\n\n'
     + '  return ' + js.join('').replace(/\n/g, '\\n');
 
   return new Function('obj', js);
@@ -124,9 +126,17 @@ function indent(str) {
  * @api private
  */
 
-function section(obj, prop, negate, thunk) {
-  var val = obj[prop];
-  if (Array.isArray(val)) return val.map(thunk).join('');
+window.__minstache_section = function section(obj, prop, negate, thunk) {
+  var props = prop.split('.');
+  var val = obj;
+  while (prop = props.shift()) {
+    if (typeof val[prop] !== 'undefined') {
+      val = val[prop];
+    } else {
+      break;
+    }
+  }
+  if (val instanceof Array) return val.map(thunk).join('');
   if ('function' == typeof val) return val.call(obj, thunk(obj));
   if (negate) val = !val;
   if (val) return thunk(obj);

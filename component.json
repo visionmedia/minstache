@@ -1,6 +1,6 @@
 {
   "name": "minstache",
-  "version": "1.2.0",
+  "version": "1.2.7",
   "description": "Mini mustache template engine",
   "keywords": ["mustache", "template", "engine"],
   "scripts": ["index.js"]
