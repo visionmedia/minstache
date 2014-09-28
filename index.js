@@ -11,6 +11,8 @@ exports = module.exports = render;
 
 exports.compile = compile;
 
+window = window || {};
+
 /**
  * Render the given mustache `str` with `obj`.
  *
@@ -52,12 +54,12 @@ function compile(str) {
         case '^':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", true, function(obj){ return ');
+          js.push(' + window.__minstache_section(obj, "' + tok + '", true, function(obj){ return ');
           break;
         case '#':
           tok = tok.slice(1);
           assertProperty(tok);
-          js.push(' + section(obj, "' + tok + '", false, function(obj){ return ');
+          js.push(' + window.__minstache_section(obj, "' + tok + '", false, function(obj){ return ');
           break;
         case '!':
           tok = tok.slice(1);
@@ -73,7 +75,7 @@ function compile(str) {
 
   js = '\n'
     + indent(escape.toString()) + ';\n\n'
-    + indent(section.toString()) + ';\n\n'
+    + indent(window.__minstache_section.toString()) + ';\n\n'
     + '  return ' + js.join('').replace(/\n/g, '\\n');
 
   return new Function('obj', js);
@@ -124,7 +126,7 @@ function indent(str) {
  * @api private
  */
 
-function section(obj, prop, negate, thunk) {
+window.__minstache_section = function section(obj, prop, negate, thunk) {
   var props = prop.split('.');
   var val = obj;
   while (prop = props.shift()) {
