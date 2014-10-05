@@ -118,4 +118,16 @@ describe('{{^id}}', function(){
     var user = { admin: false, authenticated: false };
     mm('{{^admin}}{{^authenticated}}nope{{/}}{{/}}', user).should.equal('nope');
   })
+
+  it('should consider empty arrays falsy', function(){
+    var users = { users: [] };
+    mm('users exist: {{^users}}nope{{/users}}', users)
+     .should.equal('users exist: nope');
+  })
+
+  it('should ignore populated arrays', function(){
+    var users = { users: [ 'tobi' ] };
+    mm('users exist: {{#users}}yep{{/users}}{{^users}}nope{{/users}}', users)
+     .should.equal('users exist: yep');
+  })
 })

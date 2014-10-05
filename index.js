@@ -126,7 +126,13 @@ function indent(str) {
 
 function section(obj, prop, negate, thunk) {
   var val = obj[prop];
-  if (Array.isArray(val)) return val.map(thunk).join('');
+  if (Array.isArray(val)) {
+    if (negate) {
+      return val.length ? '' : thunk(obj);
+    } else {
+      return val.map(thunk).join('');
+    }
+  }
   if ('function' == typeof val) return val.call(obj, thunk(obj));
   if (negate) val = !val;
   if (val) return thunk(obj);
