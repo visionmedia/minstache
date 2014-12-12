@@ -67,6 +67,3 @@ module.exports = function anonymous(obj) {
 
   Minstache uses `{{!name}}` for unescaped properties.
 
-## License
-
-  MIT
