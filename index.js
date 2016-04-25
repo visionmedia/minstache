@@ -74,7 +74,7 @@ function compile(str) {
   js = '\n'
     + indent(escape.toString()) + ';\n\n'
     + indent(section.toString()) + ';\n\n'
-    + '  return ' + js.join('').replace(/\n/g, '\\n');
+    + '  return ' + js.join('').replace(/\r?\n/g, '\\n');
 
   return new Function('obj', js);
 }
