@@ -7,6 +7,10 @@
   "dependencies": {
     "commander": "1.0.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/visionmedia/minstache.git"
+  },
   "devDependencies": {
     "mocha": "*",
     "should": "*"
